@@ -48,7 +48,7 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        return view('books.edit', ['book'=>$book]);
     }
 
     /**
@@ -56,7 +56,9 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $book->update($request->all());
+
+        return redirect()->back()->with(['success'=>'Libro modificato correttamente']);
     }
 
     /**
@@ -64,6 +66,19 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+        return redirect()->back()->with(['success'=>'Libro eliminato correttamente']);
+    }
+
+    public function manage(Book $book)
+    {
+        return view('books.manage', ['book'=>$book]);
+    }
+
+    public function borrow(Request $request, Book $book )
+    {
+        
+        $book->update($request->all());
+        return redirect()->route('books.index')->with(['success'=>'Noleggio aggiunto']);
     }
 }

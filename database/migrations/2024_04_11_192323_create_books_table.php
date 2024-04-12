@@ -17,7 +17,9 @@ return new class extends Migration
             $table->string('category', 30);
             $table->string('title',);
             $table->string('year',4);
-            
+            $table->boolean('borrowed')->default(false);
+            $table->string('borrowed_to',50)->nullable();
+
 
 
 
